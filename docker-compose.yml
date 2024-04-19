@@ -16,3 +16,14 @@ services:
       - mysqldb
     ports:
       - "$NODE_LOCAL_PORT:$NODE_DOCKER_PORT"
+
+  phpmyadmin:
+    image: phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysqldb
+    depends_on:
+      - mysqldb
+    restart: always
+    ports:
+      - 8080:80
