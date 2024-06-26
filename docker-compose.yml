@@ -7,6 +7,8 @@ services:
       - MYSQL_DATABASE=$MYSQL_DB
     ports:
       - "$MYSQL_LOCAL_PORT:$MYSQL_DOCKER_PORT"
+    networks:
+      - backend
   
   app:
     build: .
@@ -16,6 +18,8 @@ services:
       - mysqldb
     ports:
       - "$NODE_LOCAL_PORT:$NODE_DOCKER_PORT"
+    networks:
+      - backend
 
   phpmyadmin:
     image: phpmyadmin
@@ -27,3 +31,8 @@ services:
     restart: always
     ports:
       - 8080:80
+    networks:
+      - backend
+networks:
+  backend:
+    name: backend
